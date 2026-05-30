@@ -73,3 +73,13 @@ Status:
 
 ⚠ Diagram is based on current understanding and requires verification.
 ```
+## Information Sources
+
+Current information has been obtained from:
+
+- Server access observations
+- PM2 process review
+- Infrastructure investigation
+- Discussions with application owner
+
+This document will be updated as additional information is confirmed.
