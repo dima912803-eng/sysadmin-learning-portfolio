@@ -46,3 +46,30 @@ Backup process exists but currently requires further investigation.
 - What database is used?
 - How is offline synchronization implemented?
 - How are conflicts resolved?
+
+- ## High-Level Architecture
+
+Current understanding:
+
+```text
+Mobile App
+    │
+    ▼
+Nginx
+    │
+    ▼
+Node.js API (PM2)
+    │
+    ▼
+Database
+
+Backups
+    │
+    ▼
+Backup Storage
+```
+
+Status:
+
+⚠ Diagram is based on current understanding and requires verification.
+```
