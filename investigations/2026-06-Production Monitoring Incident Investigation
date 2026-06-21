@@ -1,0 +1,175 @@
+# Production Monitoring Incident Investigation
+
+## Overview
+
+Investigated a monitoring anomaly where infrastructure metrics temporarily disappeared from the cloud monitoring dashboard.
+
+The objective was to determine whether the issue originated from:
+
+* Server downtime
+* Application failure
+* Container failure
+* Service restart
+* Monitoring infrastructure
+
+---
+
+## Incident Detection
+
+A gap appeared in monitoring graphs, creating the impression that the server may have become unavailable.
+
+The investigation focused on verifying actual server health during the affected period.
+
+---
+
+## Step 1 — Verify System Uptime
+
+Checked system uptime:
+
+```bash
+uptime
+```
+
+Reviewed reboot history:
+
+```bash
+last reboot
+```
+
+Findings:
+
+* No unexpected reboot occurred.
+* The server remained continuously online.
+
+---
+
+## Step 2 — Review System Logs
+
+Inspected logs for the affected timeframe:
+
+```bash
+sudo journalctl --since "YYYY-MM-DD HH:MM" --until "YYYY-MM-DD HH:MM"
+```
+
+Filtered relevant events:
+
+```bash
+sudo journalctl --since "..." --until "..." | grep -Ei "restart|docker|monitor|agent"
+```
+
+---
+
+## Step 3 — Check Monitoring Services
+
+Discovered active monitoring-related services:
+
+```bash
+systemctl list-units --type=service | grep -Ei "agent|monitor"
+```
+
+Reviewed service status:
+
+```bash
+sudo systemctl status do-agent
+```
+
+---
+
+## Findings
+
+The monitoring agent was running correctly.
+
+However, repeated communication failures were present in logs:
+
+```text
+failed to send metrics
+context deadline exceeded
+Client.Timeout exceeded while waiting headers
+```
+
+Additional messages included:
+
+```text
+circuit breaker is open
+deliberately failing due to exponential backoff
+```
+
+---
+
+## Root Cause
+
+The monitoring agent was unable to successfully transmit metrics to the monitoring backend.
+
+The server itself remained operational.
+
+The issue was isolated to metrics delivery and collection rather than infrastructure availability.
+
+---
+
+## What Was Ruled Out
+
+The investigation confirmed there were no:
+
+* Server crashes
+* Reboots
+* Container failures
+* Application outages
+* Resource exhaustion events
+* Service interruptions
+
+---
+
+## Troubleshooting Commands Used
+
+System health:
+
+```bash
+uptime
+free -h
+df -h
+```
+
+Reboot history:
+
+```bash
+last reboot
+```
+
+Service inspection:
+
+```bash
+systemctl status do-agent
+systemctl list-units --type=service
+```
+
+Log analysis:
+
+```bash
+journalctl
+grep
+```
+
+---
+
+## Outcome
+
+The investigation demonstrated that:
+
+* Infrastructure remained healthy.
+* Production services continued operating normally.
+* The monitoring gap was caused by a monitoring-agent communication issue rather than an application outage.
+
+This exercise provided hands-on experience with production troubleshooting, log analysis, service inspection, and root-cause validation.
+
+---
+
+## Skills Demonstrated
+
+* Linux Troubleshooting
+* Production Incident Investigation
+* Monitoring Systems
+* Log Analysis
+* Systemd Services
+* Root Cause Analysis
+* Infrastructure Monitoring
+* Production Operations
