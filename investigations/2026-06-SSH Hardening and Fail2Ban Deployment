@@ -115,6 +115,9 @@ Confirmed:
 * No service interruption occurred.
 * Fail2Ban continued monitoring after changes.
 
+After deployment, Fail2Ban recorded 904 failed SSH attempts 
+and automatically banned 97 sources during the observation window.
+
 Useful verification commands:
 
 ```bash
