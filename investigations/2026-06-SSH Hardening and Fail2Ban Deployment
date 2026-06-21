@@ -1,0 +1,162 @@
+# SSH Hardening and Fail2Ban Deployment on a Production Linux Server
+
+## Overview
+
+Implemented additional SSH security controls on a production Ubuntu server to reduce the attack surface and improve protection against automated brute-force attacks.
+
+This work included:
+
+* Log analysis of SSH authentication attempts
+* Deployment and validation of Fail2Ban
+* SSH configuration review
+* Restricting privileged remote access
+* Testing user access after changes
+* Creating a documented recovery procedure
+
+---
+
+## Initial Observation
+
+While reviewing authentication logs, multiple automated login attempts were detected from external IP addresses.
+
+Examples included:
+
+```text
+Invalid user monitor
+Invalid user docker
+Invalid user agent
+Failed password for zabbix
+```
+
+These are common indicators of internet-wide automated SSH scanning activity.
+
+---
+
+## Investigation Process
+
+Reviewed authentication logs:
+
+```bash
+sudo journalctl -u ssh
+```
+
+Examined recent failed login attempts:
+
+```bash
+sudo grep "Failed password" /var/log/auth.log
+```
+
+Verified SSH service status:
+
+```bash
+sudo systemctl status ssh
+```
+
+---
+
+## Fail2Ban Validation
+
+Checked Fail2Ban status:
+
+```bash
+sudo systemctl status fail2ban
+```
+
+Verified active jails:
+
+```bash
+sudo fail2ban-client status
+```
+
+Reviewed SSH jail statistics:
+
+```bash
+sudo fail2ban-client status sshd
+```
+
+Results confirmed:
+
+* Failed authentication attempts were being tracked.
+* Repeated offenders were automatically banned.
+* Attack sources were prevented from continuing brute-force attempts.
+
+---
+
+## SSH Hardening
+
+Reviewed SSH daemon configuration:
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Performed configuration validation:
+
+```bash
+sudo sshd -t
+```
+
+Restarted SSH service:
+
+```bash
+sudo systemctl restart ssh
+```
+
+Validated successful access for authorized users after configuration changes.
+
+---
+
+## Testing
+
+Confirmed:
+
+* Authorized users retained access.
+* SSH service restarted successfully.
+* No service interruption occurred.
+* Fail2Ban continued monitoring after changes.
+
+Useful verification commands:
+
+```bash
+sudo systemctl status ssh
+sudo systemctl status fail2ban
+sudo fail2ban-client status sshd
+```
+
+---
+
+## Challenges Encountered
+
+### Risk of Locking Out Administrators
+
+Any SSH hardening activity carries the risk of accidental lockout.
+
+To mitigate this risk:
+
+1. Existing SSH sessions were kept open during changes.
+2. Configuration was validated before restart.
+3. Recovery steps were documented beforehand.
+4. Access testing was performed immediately after implementation.
+
+---
+
+## Outcome
+
+The server security posture was improved through:
+
+* Automated blocking of repeated login attempts
+* Reduced exposure to brute-force attacks
+* Improved SSH configuration management
+* Documented recovery and validation procedures
+
+---
+
+## Skills Demonstrated
+
+* Linux Administration
+* SSH Security
+* Fail2Ban
+* Log Analysis
+* Incident Prevention
+* Production Change Management
+* Service Validation and Recovery Planning
