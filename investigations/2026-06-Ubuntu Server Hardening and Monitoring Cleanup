@@ -1,0 +1,191 @@
+# Ubuntu Server Hardening and Monitoring Cleanup
+
+## Project Overview
+
+Performed a security and maintenance review on a Linux application server running:
+
+* Ubuntu 24.04
+* Docker
+* Nginx
+* PostgreSQL
+* Node.js API
+
+The goal was to improve operational visibility, reduce unnecessary exposure, and strengthen long-term maintainability.
+
+---
+
+## Tasks Completed
+
+### 1. Docker Log Management
+
+Investigated container log growth and verified Docker logging settings.
+
+Commands:
+
+```bash
+find /var/lib/docker/containers -name "*-json.log" -exec du -h {} \;
+docker inspect <container> | grep LogConfig -A 10
+```
+
+Implemented log rotation:
+
+```yaml
+logging:
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "5"
+```
+
+Result:
+
+* Prevented unlimited log growth.
+* Reduced risk of disk exhaustion.
+
+---
+
+### 2. Linux Kernel Review
+
+Reviewed installed kernel versions and boot configuration.
+
+Commands:
+
+```bash
+dpkg -l
+ls -lh /boot
+```
+
+Verified:
+
+* Current kernel is active.
+* Previous kernel retained as rollback option.
+
+---
+
+### 3. Automatic Security Updates Validation
+
+Reviewed unattended-upgrades configuration.
+
+Commands:
+
+```bash
+systemctl status unattended-upgrades
+unattended-upgrade --dry-run --debug
+```
+
+Verified:
+
+* Automatic security update mechanism operational.
+* No configuration issues detected.
+
+---
+
+### 4. Network Exposure Audit
+
+Reviewed listening services and externally exposed ports.
+
+Commands:
+
+```bash
+ss -tulpn
+```
+
+Findings:
+
+* Web services exposed through Nginx.
+* Internal application services identified.
+* Monitoring services reviewed.
+
+---
+
+### 5. Monitoring Infrastructure Cleanup
+
+Discovered and investigated a legacy monitoring agent.
+
+Steps:
+
+* Reviewed service configuration.
+* Identified remote monitoring endpoint.
+* Confirmed service was no longer required.
+* Disabled obsolete monitoring component.
+
+Commands:
+
+```bash
+systemctl stop <service>
+systemctl disable <service>
+```
+
+Result:
+
+* Reduced operational complexity.
+* Removed unnecessary external dependency.
+
+---
+
+### 6. Docker Service Hardening
+
+Application container originally listened on all network interfaces.
+
+Previous configuration:
+
+```yaml
+0.0.0.0:3002
+```
+
+Updated configuration:
+
+```yaml
+127.0.0.1:3002
+```
+
+Verification:
+
+```bash
+ss -tulpn
+curl http://127.0.0.1:3002
+```
+
+Result:
+
+* Service remains functional.
+* Direct external access removed.
+* Access restricted to local reverse proxy.
+
+---
+
+### 7. Administration Toolkit Installation
+
+Installed:
+
+```bash
+htop
+btop
+ncdu
+tree
+```
+
+Benefits:
+
+* Process monitoring
+* Resource analysis
+* Disk usage troubleshooting
+* Filesystem visualization
+
+---
+
+## Key Skills Demonstrated
+
+* Linux Administration
+* Docker Operations
+* Service Hardening
+* Log Management
+* Network Auditing
+* System Monitoring
+* Troubleshooting
+* Security Review
+* Operational Maintenance
+
+## Outcome
+
+The server was successfully reviewed and hardened with improved logging controls, reduced network exposure, removal of obsolete monitoring components, and better operational tooling for future maintenance.
