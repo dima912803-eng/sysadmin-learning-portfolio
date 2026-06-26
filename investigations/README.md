@@ -1,18 +1,29 @@
-# Investigations
+# Infrastructure Investigations
 
-This directory contains infrastructure investigations, troubleshooting exercises, and operational reviews.
+This section contains real-world server administration investigations, troubleshooting reports, security reviews, and production change documentation.
 
-## Investigation Format
+## Investigation Index
 
-Each investigation should contain:
+| Investigation | Category | Technologies | Key Skills |
+|--------------|-----------|-------------|------------|
+| Production API Migration | Infrastructure | Docker, Nginx, PostgreSQL | Migration, Rollback, Troubleshooting |
+| SSH Hardening | Security | Linux, SSH, Fail2Ban | Hardening, Access Control |
+| Monitoring Agent Review | Monitoring | Ubuntu | Incident Investigation |
+| PostgreSQL Exposure Review | Security | PostgreSQL | Risk Assessment |
+| Backup Validation | Operations | PostgreSQL | Disaster Recovery |
+| First Server Access | Administration | Linux, SSH | Initial Provisioning |
 
-- Objective
+## Investigation Methodology
+
+Each report follows a standard structure:
+
 - Environment
-- Activities Performed
-- Findings
+- Problem Statement
+- Investigation
+- Root Cause
+- Resolution
+- Validation
+- Rollback Plan
 - Lessons Learned
-- Next Steps
 
-## Current Investigations
-
-- First Server Access
+This approach mirrors real-world operational documentation used by system administrators and infrastructure teams.
