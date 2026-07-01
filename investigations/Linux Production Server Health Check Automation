@@ -1,0 +1,98 @@
+Linux Production Server Health Check Automation
+
+Overview
+
+To improve the daily administration of the Stable Manager production server, I developed a reusable Bash health check script that consolidates infrastructure monitoring into a single command.
+
+Instead of manually checking multiple services and logs every day, the script provides a concise overview of the server's health, helping identify infrastructure issues before they impact users.
+
+Objective
+
+Create an automated daily health check capable of monitoring the most important components of a Linux production server:
+
+System uptime and load
+Disk utilization
+Memory and swap usage
+Docker container status
+Container restart count
+Nginx service
+PostgreSQL service
+Fail2ban protection
+Application errors
+HTTP endpoint availability
+Overall infrastructure health summary
+Technologies
+Ubuntu Server
+Bash
+Docker
+Nginx
+PostgreSQL
+Fail2ban
+systemd
+journalctl
+curl
+Implementation
+
+A custom script (daily-health-check.sh) was created to automate routine server inspections.
+
+The script performs:
+
+CPU load monitoring
+Disk usage validation with warning thresholds
+Memory availability checks
+Swap monitoring
+Docker container verification
+Docker restart counter inspection
+Nginx service validation
+PostgreSQL service validation
+Fail2ban jail status inspection
+SSH and Nginx banned IP statistics
+Application log analysis for recent errors
+HTTP endpoint verification
+Automatic infrastructure summary
+
+The script was later enhanced with:
+
+🟢 Healthy
+🟡 Warning
+🔴 Critical
+
+status indicators, making the output much easier to interpret during routine maintenance.
+
+Investigation Results
+
+Running the health check confirmed:
+
+Production server uptime exceeding 23 days
+Very low CPU utilization
+Stable memory consumption
+Docker container running continuously with 0 restarts
+Nginx and PostgreSQL operating normally
+Fail2ban actively protecting both SSH and Nginx
+No infrastructure failures detected
+
+During log analysis, one application-level error was identified involving a duplicate invoice token. Investigation showed that the PostgreSQL unique constraint correctly prevented duplicate data insertion, confirming that the infrastructure remained healthy while the issue was isolated to application business logic.
+
+Lessons Learned
+
+This project demonstrated the importance of distinguishing between infrastructure failures and application-level issues.
+
+Instead of reacting to every logged error as a server problem, I learned to:
+
+verify service availability first;
+inspect container health before debugging code;
+validate security controls;
+separate infrastructure responsibilities from application development.
+Outcome
+
+The server now has a reusable daily monitoring tool that reduces routine inspection time and provides a consistent overview of system health.
+
+This project also strengthened my practical experience with:
+
+Linux system administration
+Production monitoring
+Docker operations
+Service management
+Log analysis
+Bash scripting
+Infrastructure troubleshooting
