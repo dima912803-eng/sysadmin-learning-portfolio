@@ -1,0 +1,128 @@
+# Linux Server Hardening Project – Real Production Environment
+
+## Project Summary
+
+Over a two-week period I performed a security hardening review and infrastructure improvement project on a Linux-based production environment hosting a web application and PostgreSQL database.
+
+The objective was to reduce attack surface, improve monitoring, and implement automated protection against common internet threats.
+
+## Technologies
+
+* Ubuntu Server
+* Docker
+* Nginx
+* PostgreSQL
+* Fail2Ban
+* SSH
+* DigitalOcean Monitoring
+
+---
+
+## Key Improvements
+
+### SSH Hardening
+
+Implemented:
+
+* Root login disabled
+* Sudo-based administration
+* Fail2Ban SSH protection
+
+Result:
+
+* Automated blocking of brute-force login attempts
+* Reduced exposure to common internet scanning activity
+
+---
+
+### Fail2Ban Deployment
+
+Configured and verified multiple Fail2Ban jails.
+
+Observed results:
+
+* 2047 automated ban events
+* 300 unique malicious IP addresses detected
+* Continuous internet scanning activity identified and mitigated
+
+This provided a practical demonstration of how frequently internet-facing servers are targeted by automated attack tools.
+
+---
+
+### Web Server Protection
+
+Configured Nginx-related Fail2Ban filters.
+
+Successfully detected and blocked:
+
+* malicious bots
+* automated scanners
+* suspicious reconnaissance traffic
+
+---
+
+### Database Security
+
+Improved PostgreSQL security posture by:
+
+* removing unnecessary public exposure
+* restricting trusted network access
+* tightening connection policies
+
+Result:
+
+* significantly reduced attack surface
+
+---
+
+### Docker Migration
+
+Migrated application workload from PM2-based deployment to Docker containers.
+
+Benefits achieved:
+
+* process isolation
+* simplified deployment workflow
+* cleaner service management
+
+---
+
+### Secret Management Review
+
+Identified and remediated hardcoded secrets.
+
+Implemented:
+
+* environment variable usage
+* credential rotation
+* configuration cleanup
+
+---
+
+### Monitoring and Operational Visibility
+
+Verified infrastructure monitoring using DigitalOcean monitoring agents and system metrics.
+
+Areas reviewed:
+
+* CPU usage
+* Memory usage
+* Disk utilization
+* Network activity
+
+---
+
+## Lessons Learned
+
+This project provided hands-on experience with:
+
+* Linux server administration
+* Security hardening
+* Docker deployment
+* Reverse proxy configuration
+* Database security
+* Fail2Ban configuration
+* Log analysis
+* Production troubleshooting
+
+One of the most interesting findings was observing over 2000 automated ban events from 300 unique IP addresses, demonstrating the constant background level of hostile internet activity faced by public servers.
