@@ -1,0 +1,103 @@
+# Reorganising Linux Infrastructure for Long-Term Maintainability
+
+## Overview
+
+As the project grew, the backend application was still organised around an early development workflow where application files lived inside a personal user directory.
+
+While this worked initially, it made administration, collaboration and future automation increasingly difficult.
+
+The objective was to reorganise the server into a cleaner, service-oriented structure that followed common Linux administration practices without affecting application availability.
+
+---
+
+## The Challenge
+
+The existing layout introduced several operational problems:
+
+- Application files were tied to a specific user account.
+- Ownership and permissions became harder to manage.
+- Multiple administrators required access to the same project.
+- Future deployment automation would depend on a personal directory structure.
+- The server organisation no longer reflected the growing production environment.
+
+Although the application continued to function correctly, the infrastructure itself was becoming harder to maintain.
+
+---
+
+## My Approach
+
+Instead of leaving the historical layout in place, I reorganised the infrastructure to better separate application services from personal user data.
+
+The work included:
+
+- relocating the application into a dedicated service location
+- reviewing file ownership and permissions
+- simplifying administrator access
+- removing dependency on an individual user's home directory
+- preparing the project for automated deployments and future team growth
+
+The objective was not only to improve today's server structure but also to reduce operational complexity as the project expands.
+
+---
+
+## Architecture
+
+```mermaid
+flowchart TD
+    A[User Home Directory] -->|Early Development| B[Application]
+
+    B --> C[Infrastructure Review]
+
+    C --> D[Dedicated Service Location]
+
+    D --> E[Shared Administration]
+    D --> F[Deployment Automation]
+    D --> G[Improved Maintainability]
+```
+
+---
+
+## Outcome
+
+The infrastructure became easier to understand and maintain.
+
+The reorganisation delivered several long-term benefits:
+
+- Clear separation between user data and application services.
+- More predictable permissions and ownership.
+- Easier collaboration between administrators.
+- Better foundation for CI/CD automation.
+- Infrastructure that follows common Linux server practices.
+
+Although the migration itself was relatively small, it significantly improved the maintainability of the production environment.
+
+---
+
+## Technologies
+
+- Ubuntu Linux
+- Docker
+- Git
+- Linux Filesystem Hierarchy
+- File Permissions
+- System Administration
+
+---
+
+## Skills Demonstrated
+
+- Linux Administration
+- Infrastructure Design
+- Filesystem Organisation
+- Permission Management
+- Production Migration
+- Deployment Preparation
+- Operational Planning
+
+---
+
+## Key Lesson
+
+Infrastructure decisions made during the early stages of a project often become technical debt as the system grows.
+
+Investing time in a clean server layout before introducing additional automation makes future administration, onboarding and deployments significantly simpler.
