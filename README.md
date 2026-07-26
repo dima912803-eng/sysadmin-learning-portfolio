@@ -1,134 +1,92 @@
 # Sysadmin Learning Portfolio
 
-Practical Linux, Docker, Networking, Security, and Infrastructure investigations based on real-world server administration and troubleshooting.
+A hands-on portfolio documenting real-world Linux administration, infrastructure engineering and production support.
 
-This repository documents hands-on work performed on production and development environments, including incident investigations, service migrations, security hardening, monitoring, and infrastructure maintenance.
+This repository contains practical projects completed while managing production and development environments, focusing on reliability, automation, security and operational best practices.
 
 ---
 
-## About Me
+## Featured Projects
 
-I am an IT professional transitioning from hardware and infrastructure support into System Administration.
+| Project | Focus | Technologies |
+|---------|-------|--------------|
+| Building a Reliable CI Pipeline | Continuous Integration | GitHub Actions, Docker |
+| Controlled Production Deployment | Continuous Deployment | GitHub Actions, Docker, Linux |
+| Linux Infrastructure Reorganisation | Infrastructure Design | Linux, Docker, Git |
 
-Current areas of focus:
+---
 
-- Linux Administration (Ubuntu)
-- Docker & Docker Compose
-- Nginx Reverse Proxy
+## Infrastructure Investigations
+
+The `investigations` directory contains engineering case studies based on real infrastructure work.
+
+Topics include:
+
+- Docker migration
+- PostgreSQL hardening
+- SSH security
+- Fail2Ban deployment
+- Monitoring
+- Backup validation
+- Disk space remediation
+- Database migration
+- Infrastructure improvements
+
+➡ **Browse all investigations:** `investigations/README.md`
+
+---
+
+## Repository Structure
+
+```text
+.
+├── investigations/
+│   ├── Infrastructure case studies
+│   ├── Security reviews
+│   ├── Incident investigations
+│   └── Production documentation
+│
+├── diagrams/
+├── images/
+└── README.md
+```
+
+---
+
+## Technologies
+
+- Linux (Ubuntu)
+- Docker
+- Git & GitHub
+- GitHub Actions
 - PostgreSQL
-- SSH & Server Security
-- Monitoring & Troubleshooting
-- Microsoft 365 & Entra ID
+- Nginx
+- SSH
+- Fail2Ban
+- Bash
+- DigitalOcean
+
+---
+
+## What This Portfolio Demonstrates
+
+- Linux Administration
+- Infrastructure Engineering
+- Production Troubleshooting
+- Continuous Integration
+- Continuous Deployment
+- Security Hardening
+- Docker Administration
+- Database Operations
+- Monitoring & Incident Response
 - Infrastructure Documentation
 
-My goal is to build practical system administration experience through real-world investigations, problem solving, and operational improvements.
-
 ---
 
-## Core Skills Demonstrated
+## Current Focus
 
-### Linux Administration
-
-- User management
-- SSH access control
-- Service management (systemd)
-- Log analysis
-- Disk space management
-- Performance troubleshooting
-
-### Docker
-
-- Container deployment
-- Docker Compose
-- Network troubleshooting
-- Production migrations
-- Container logging
-
-### Web Infrastructure
-
-- Nginx reverse proxy
-- SSL/TLS management
-- Application routing
-- Production traffic switching
-
-### Database Administration
-
-- PostgreSQL connectivity
-- Access restrictions
-- Backup validation
-- Security reviews
-
-### Security
-
-- SSH hardening
-- Fail2Ban deployment
-- Exposure assessment
-- Least-privilege access review
-
-### Documentation
-
-- Incident reports
-- Root cause analysis
-- Change management
-- Rollback planning
-
----
-
-# Investigations
-
-| Investigation | Technologies | Skills Demonstrated |
-|--------------|-------------|---------------------|
-| Production API Migration | Docker, Nginx, PostgreSQL | Deployment, troubleshooting, rollback planning |
-| SSH Hardening | Linux, SSH, Fail2Ban | Security implementation |
-| Monitoring Agent Investigation | Ubuntu, Monitoring | Incident analysis |
-| PostgreSQL Exposure Review | PostgreSQL | Security assessment |
-| Backup Validation | PostgreSQL | Recovery planning |
-| Server Access Setup | Linux, SSH | Initial server provisioning |
-
-See the investigations folder for detailed reports.
-
----
-
-# Example Investigation Workflow
-
-1. Identify problem
-2. Collect evidence
-3. Analyse logs
-4. Test hypotheses
-5. Implement fix
-6. Validate solution
-7. Document results
-8. Define rollback plan
-
----
-
-# Technologies
-
-- Ubuntu Server
-- Docker
-- Docker Compose
-- Nginx
-- PostgreSQL
-- PM2
-- Git
-- GitHub
-- Fail2Ban
-- Microsoft Entra ID
-
----
-
-# Current Learning Path
-
-- Active Directory
-- Microsoft 365 Administration
-- Group Policy
-- Windows Server
-- Infrastructure Monitoring
-
----
-
-# Contact
-
-LinkedIn: https://www.linkedin.com/in/dmitrii-andronic-32610b1b9/
-
-GitHub: github.com/dima912803-eng
+- Expanding CI/CD workflows
+- Infrastructure architecture
+- Monitoring and observability
+- Automation with Bash
+- Production operations
