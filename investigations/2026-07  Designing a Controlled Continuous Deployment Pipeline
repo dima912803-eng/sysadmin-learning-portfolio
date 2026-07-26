@@ -1,0 +1,98 @@
+# Designing a Controlled Continuous Deployment Pipeline
+
+## Overview
+
+After introducing Continuous Integration, the next objective was to automate deployments without sacrificing production stability.
+
+Rather than creating a fully automatic deployment pipeline, I designed a controlled Continuous Deployment (CD) process. The goal was to reduce manual work while ensuring that production releases remained deliberate, predictable and easy to troubleshoot.
+
+---
+
+## The Challenge
+
+The existing deployment process relied on manually connecting to the Linux server, updating the application and restarting services.
+
+This approach worked for a small team but introduced several risks:
+
+- Production deployments depended on manual steps.
+- Deployment procedures were difficult to reproduce consistently.
+- Infrastructure changes were becoming harder to track.
+- Releasing a new version always carried the risk of human error.
+
+Simply automating every deployment was not the right solution. The release process first needed clear control points.
+
+---
+
+## My Approach
+
+Instead of deploying every successful commit automatically, I implemented a controlled deployment workflow.
+
+The solution separates software validation from production deployment:
+
+- Continuous Integration verifies that the application can be built successfully.
+- Production deployment requires an explicit approval before any infrastructure changes occur.
+- The deployment process rebuilds the application, replaces the running container and verifies that the service starts correctly.
+
+This approach keeps deployments automated while ensuring that production changes remain intentional.
+
+---
+
+## Deployment Flow
+
+```mermaid
+flowchart LR
+    A[Developer Push] --> B[GitHub]
+    B --> C[CI Validation]
+    C --> D{Deployment Approval}
+    D -->|Approved| E[Production Environment]
+    E --> F[Rebuild Application]
+    F --> G[Health Verification]
+```
+
+---
+
+## Outcome
+
+The deployment process became significantly more reliable.
+
+The new workflow provides:
+
+- Consistent deployment steps.
+- Reduced manual intervention.
+- Clear separation between testing and production.
+- Better visibility into deployment history.
+- Faster recovery when issues occur.
+- Safer production releases through manual approval.
+
+The infrastructure is now prepared for future improvements such as automated rollback, deployment notifications and database migration workflows.
+
+---
+
+## Technologies
+
+- GitHub Actions
+- Docker
+- Docker Compose
+- Linux
+- Git
+- SSH
+- Nginx
+
+---
+
+## Skills Demonstrated
+
+- Continuous Deployment (CD)
+- Release Automation
+- Docker Operations
+- Linux Administration
+- GitHub Actions
+- Deployment Strategy
+- Infrastructure Reliability
+- Change Management
+
+---
+
+## Key Lesson
+
+Successful deployment automation is not about removing people from the process—it is about removing unnecessary manual work while keeping control over production. Separating Continuous Integration from Continuous Deployment created a safer release process without sacrificing deployment speed.
