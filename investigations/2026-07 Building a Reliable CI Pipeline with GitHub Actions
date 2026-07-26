@@ -1,0 +1,105 @@
+Building a Reliable CI Pipeline with GitHub Actions
+
+
+## Overview
+
+The project relied on manual validation before every release. Docker images were built locally, and there was no automated way to verify that every commit could be deployed successfully.
+
+My goal was to establish a reliable Continuous Integration (CI) pipeline that automatically validated every change before it reached production. The solution needed to be simple, reproducible and easy for new developers to adopt.
+
+---
+
+## The Challenge
+
+The repository had evolved from a small startup project where most work was performed directly on the server.
+
+This created several risks:
+
+- No automated validation before deployment.
+- Different developers could build the project differently.
+- Hidden dependency issues only appeared during deployment.
+- Production was becoming the primary place where problems were discovered.
+
+The first step was not writing a GitHub Actions workflow—it was making the repository predictable enough that automation could trust it.
+
+---
+
+## My Approach
+
+Before introducing CI, I reviewed the repository and standardised the application structure.
+
+The work included:
+
+- verifying the Git repository state
+- ensuring the main branch was synchronised
+- standardising application startup scripts
+- improving Docker build consistency
+- validating that a clean environment could build the project successfully
+
+Once the repository became reproducible, I implemented a GitHub Actions workflow that automatically:
+
+1. Checks out the latest source code.
+2. Installs project dependencies.
+3. Builds the Docker image.
+4. Reports the result directly in GitHub.
+
+This transformed validation from a manual task into an automated quality gate.
+
+---
+
+## Pipeline Overview
+
+```mermaid
+flowchart LR
+    A[Developer Push] --> B[GitHub Repository]
+    B --> C[GitHub Actions]
+    C --> D[Install Dependencies]
+    D --> E[Build Docker Image]
+    E --> F{Build Successful?}
+    F -->|Yes| G[Ready for Deployment]
+    F -->|No| H[Fix Before Merge]
+```
+
+---
+
+## Outcome
+
+The new CI pipeline introduced several improvements:
+
+- Every commit is validated automatically.
+- Docker builds are tested in a clean environment.
+- Build issues are detected before deployment.
+- Developers receive immediate feedback.
+- The repository became a reliable source of truth for future automation.
+
+Most importantly, this established a solid foundation for introducing Continuous Deployment later without increasing operational risk.
+
+---
+
+## Technologies
+
+- Git
+- GitHub Actions
+- Docker
+- Node.js
+- Linux
+- Bash
+
+---
+
+## Skills Demonstrated
+
+- Continuous Integration (CI)
+- GitHub Actions
+- Docker Build Automation
+- Git Workflow Management
+- Linux Development Environment
+- Build Validation
+- Troubleshooting
+- Infrastructure Automation
+
+---
+
+## Key Lesson
+
+A successful CI pipeline depends on more than automation. Before introducing GitHub Actions, the repository itself had to become predictable and reproducible. Standardising the project structure first made automation reliable instead of simply automating existing inconsistencies.
